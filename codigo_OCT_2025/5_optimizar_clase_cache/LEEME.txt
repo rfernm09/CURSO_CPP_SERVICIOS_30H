@@ -1,1 +1,0 @@
-Clase basada en una plantilla para gestionar una cache
