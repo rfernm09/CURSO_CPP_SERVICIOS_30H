@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <crow.h>
+#include "ServicioCrow.h"
 
 void testCrow() {
     crow::SimpleApp app;
@@ -12,9 +13,16 @@ void testCrow() {
     app.port(18080).run();
 }
 
+void testServicioCrow() {
+    ServicioCrow servicio;
+
+    servicio.run();
+
+}
 
 int main() {
-    testCrow();
+    //testCrow();
+    testServicioCrow();
     return 0;
 }
 

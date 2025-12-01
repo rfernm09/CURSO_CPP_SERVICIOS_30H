@@ -49,6 +49,7 @@ void ServicioCrow::run() {
 
 		// Recuperar el usuario con la clave id
 		crow::json::rvalue user = usuarios[id];
+		CROW_LOG_INFO << "usuarios[id]: " << usuarios[id];
 
 		res["id"] = id;
 		res["nombre"] = user["nombre"].s(); // como string
@@ -59,7 +60,7 @@ void ServicioCrow::run() {
 		});
 
 	// Poner en marcha el servicio:
-	app.port(PORT).multithreaded().concurrency(4).run();
+	app.port(PORT).multithreaded().concurrency(4).loglevel(crow::LogLevel::Debug).run();
 }
 
 ServicioCrow::~ServicioCrow()
