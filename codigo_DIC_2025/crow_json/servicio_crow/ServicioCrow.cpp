@@ -24,7 +24,7 @@ void ServicioCrow::run() {
 		// Dar de alta el nuevo usuario:
 		std::lock_guard<std::mutex> lock(this->mutex);
 		int id = this->siguiente_id++;
-		this->usuarios[id] = body;
+		this->usuarios[id] = std::move(body); // Movemos en vez de copiar, si no, cambia codificación
 
 		// Montar las respuesta para el cliente:
 		crow::json::wvalue res;
