@@ -52,8 +52,22 @@ void ServidorREST::procesarPeticion(tcp::socket& socket) {
 		// Conexion persistente:
 		response.keep_alive(request.keep_alive());
 
-		// Programar el enrutamiento:
+		// Programar el enrutamiento: http://localhost:8080/items (POST)
+		if (request.method() == http::verb::post && request.target() == "/items") {
+			response.body() = this->peticionPOST(request.body());
 
+		}
+		// http://localhost:8080/items (GET)
+		else if (request.method() == http::verb::get && request.target() == "/items") {
+			response.body() = this->peticionGET();
+
+		}  // http://localhost:8080/items/id (DELETE)
+		else if (request.method() == http::verb::delete_ && request.target() == "/items/") {
+			
+			// Capturar el parámetro int que viene en la URL (target)
+			
+			// lanzar un error si no viene el id: 400 Bad_request
+		}
 
 
 		// Calcular el tamaño de la respuesta: content_length
