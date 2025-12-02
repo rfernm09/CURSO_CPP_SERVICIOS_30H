@@ -62,7 +62,7 @@ void ServidorREST::procesarPeticion(tcp::socket& socket) {
 			response.body() = this->peticionGET();
 
 		}  // http://localhost:8080/items/id (DELETE)
-		else if (request.method() == http::verb::delete_ && request.target() == "/items/") {
+		else if (request.method() == http::verb::delete_ && request.target().starts_with("/items/")) {
 			
 			// Capturar el parámetro int que viene en la URL (target)
 			std::string id_str = target.substr(std::string("/items/").size());
