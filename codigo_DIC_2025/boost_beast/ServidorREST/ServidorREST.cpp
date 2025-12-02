@@ -117,7 +117,7 @@ std::string ServidorREST::peticionPOST(const std::string& body)
 	json req = json::parse(body);
 
 	// Validacion del json recibido:
-	if (req.contains("value") || !req["value"].is_string()) {
+	if (!req.contains("value") || !req["value"].is_string()) {
 		json resp = {
 			{"error", "Campo value obligatorio y debe ser un string"}
 		};
