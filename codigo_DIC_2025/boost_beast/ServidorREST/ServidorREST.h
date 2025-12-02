@@ -16,6 +16,7 @@ using tcp = net::ip::tcp;
 
 class ServidorREST
 {
+	
 	net::io_context& ioc;
 	tcp::acceptor acceptor;
 

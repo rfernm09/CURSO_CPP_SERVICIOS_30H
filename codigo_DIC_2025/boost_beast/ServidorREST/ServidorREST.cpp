@@ -69,6 +69,7 @@ void ServidorREST::procesarPeticion(tcp::socket& socket) {
 			// lanzar un error si no viene el id: 400 Bad_request
 		}
 
+		
 
 		// Calcular el tamaño de la respuesta: content_length
 		response.prepare_payload();
