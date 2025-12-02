@@ -9,10 +9,14 @@
 #include <unordered_map>
 #include <string>
 
+#include <nlohmann/json.hpp>
+
 namespace beast = boost::beast;
 namespace http = beast::http;
 namespace net = boost::asio;
 using tcp = net::ip::tcp;
+
+using json = nlohmann::json;
 
 class ServidorREST
 {

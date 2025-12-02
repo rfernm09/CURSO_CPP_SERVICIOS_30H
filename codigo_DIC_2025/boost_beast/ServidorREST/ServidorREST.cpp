@@ -65,11 +65,25 @@ void ServidorREST::procesarPeticion(tcp::socket& socket) {
 		else if (request.method() == http::verb::delete_ && request.target() == "/items/") {
 			
 			// Capturar el parámetro int que viene en la URL (target)
+			std::string id_str = target.substr(std::string("/items/").size());
 			
 			// lanzar un error si no viene el id: 400 Bad_request
-		}
+			try {
+				int id = std::stoi(id_str);
+				response.body() = this->peticionDELETE(id);
 
-		
+			}
+			catch (...) {
+				response.result(http::status::bad_request); // codigo 400
+				response.body() = "Falta el id a borrar";
+			}
+
+		}
+		else {
+			response.result(http::status::not_found); // Error 404
+			response.body() = "Ruta no encontrada";
+		}
+			
 
 		// Calcular el tamaño de la respuesta: content_length
 		response.prepare_payload();
@@ -77,6 +91,7 @@ void ServidorREST::procesarPeticion(tcp::socket& socket) {
 		// Escribir respuesta:
 		http::write(socket, response);
 	}
+
 	catch (const std::exception& e) {
 		std::cerr << "ERROR: " << e.what() << std::endl;
 	}
@@ -86,7 +101,15 @@ void ServidorREST::procesarPeticion(tcp::socket& socket) {
 std::string ServidorREST::peticionGET()
 {
 	// Devuelve todos los nombres de la colección
-	return std::string();
+	json resp;
+
+	for (const auto& [id, value] : this->items) {
+		json aux = { {"id", id}, {"value", value} };
+		resp.push_back(aux);
+	}
+
+	// Devolvemos el json como una cadena:
+	return resp.dump();
 }
 
 std::string ServidorREST::peticionPOST(const std::string&)
