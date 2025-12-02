@@ -34,6 +34,36 @@ void ServicioCrow::run() {
 		return crow::response(201, res);
 	});
 
+	CROW_ROUTE(app, "/usuarios/<int>").methods(crow::HTTPMethod::PUT)([this](const crow::request& req, int id) {
+
+		// Recoger el cuerpo de la petición:
+		auto body = crow::json::load(req.body);
+		if (!body) {
+			return crow::response(400, "Json incorrecto");
+		}
+
+		// Actualizar el registro en la coleccion:
+		std::lock_guard<std::mutex> lock(this->mutex);
+
+		int n = this->usuarios.count(id);
+
+		if (!n) {
+			// Si no existe -> recurso no disponible
+			return crow::response(404, "Usuario " + std::to_string(id) + " no encontrado");
+		}
+
+		// Machacar el usuarios con los nuevos datos:
+		usuarios[id] = std::move(body);
+
+		// Preparar la respuesta para el cliente:
+		crow::json::wvalue res;
+		res["id"] = id;
+		res["mensaje"] = "Usuario actualizado";
+
+		return crow::response(201, res);
+
+		});
+
 	CROW_ROUTE(app, "/usuarios").methods(crow::HTTPMethod::GET)([this]() {
 		std::lock_guard<std::mutex> lock(this->mutex);
 
