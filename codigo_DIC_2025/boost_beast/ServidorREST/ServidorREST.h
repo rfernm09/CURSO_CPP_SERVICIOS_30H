@@ -6,6 +6,7 @@
 #include <boost/asio/ip/tcp.hpp>
 
 #include <iostream>
+#include <unordered_map>
 #include <string>
 
 namespace beast = boost::beast;
@@ -17,6 +18,15 @@ class ServidorREST
 {
 	net::io_context& ioc;
 	tcp::acceptor acceptor;
+
+	std::unordered_map<int, std::string> items;
+	int id;
+
+	void procesarPeticion(tcp::socket&);
+	std::string peticionGET();
+	std::string peticionPOST(const std::string&);
+	std::string peticionDELETE(int);
+
 
 public:
 	ServidorREST(net::io_context&, unsigned int port);
