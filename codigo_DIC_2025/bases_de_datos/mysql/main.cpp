@@ -4,14 +4,36 @@
 #include <iostream>
 
 #include <mysql/mysql.h>
+#include <soci/soci.h>
+#include <soci/mysql/soci-mysql.h>
+
 #include <string>
 #include <iostream>
+
+#include "EmpleadoRepositorio.h"
 
 #define SERVER "localhost"
 #define USER "antonio"
 #define PASS "antonio"
 #define BD "empresa3"
 #define PORT 3307
+
+void testRepositorio() {
+    // Crear la sesion de soci:
+    soci::session sql(soci::mysql, "db=empresa3 user=antonio password=antonio host=127.0.0.1 port=3307");
+
+    EmpleadoRepositorio repo(sql);
+
+    // Recuperar un empleado con el id:
+    auto resul1 = repo.read(1);
+
+    if (resul1) {
+        std::cout << resul1->id << " " << resul1->nombre << " " << resul1->cargo << std::endl;
+    }
+    else {
+        std::cout << "No existe el empleado" << std::endl;
+    }
+}
 
 void testMySQL() {
 	MYSQL* con;
