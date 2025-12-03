@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
@@ -7,6 +8,11 @@ class Empleado {
 public:
     int id;
     std::string nombre, cargo;
+
+
+    std::string to_string() const {
+        return std::to_string(id) + " " + nombre + " " + cargo;
+    }
 };
 
 // fuera de la clase, en el mismo namespace
