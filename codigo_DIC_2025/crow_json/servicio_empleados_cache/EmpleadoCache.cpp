@@ -1,4 +1,5 @@
 #include <nlohmann/json.hpp>
+#include <iostream>
 
 using json = nlohmann::json;
 
@@ -16,7 +17,7 @@ EmpleadoCache::EmpleadoCache()
 std::optional<Empleado> EmpleadoCache::getEmpleado(int id)
 {
 	// Montamos la clave para buscar en Redis:
-	std::string key = "empleado:" + std::to_string(id);
+	std::string key = "empleado" + std::to_string(id);
 
 	// Buscar la clave:
 	redisReply* reply = (redisReply*)redisCommand(this->contexto, "GET %s", key);
@@ -26,6 +27,7 @@ std::optional<Empleado> EmpleadoCache::getEmpleado(int id)
 
 		// Devolver el empleado
 		std::string cadJson = reply->str;
+		std::cout << "getEmpleado: " << cadJson << std::endl;
 
 		json j = json::parse(cadJson);
 	
@@ -43,10 +45,11 @@ std::optional<Empleado> EmpleadoCache::getEmpleado(int id)
 void EmpleadoCache::saveEmpleado(Empleado emp)
 {
 	// Montamos la clave para buscar en Redis:
-	std::string key = "empleado:" + std::to_string(emp.id);
+	std::string key = "empleado" + std::to_string(emp.id);
 
 	json j = emp;
 	std::string strEmp = j.dump();
+	std::cout << "saveEmpleado: " << emp.to_string() << " " << strEmp << std::endl;
 
 	// Guardamos el objeto empleado como una cadena en la clave:
 	redisReply* reply = (redisReply*)redisCommand(this->contexto, "SET %s %s", key, strEmp);
