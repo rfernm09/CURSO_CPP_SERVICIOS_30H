@@ -19,7 +19,7 @@ void EmpleadoCROW::run() {
 			auto empleado = this->repositorio.recuperarEmpleado(id);
 
 			if (!empleado.has_value()) {
-				return crow::response(404, "Empleado con id: "+std::to_string(id)+" no existe"):
+				return crow::response(404, "Empleado con id: " + std::to_string(id) + " no existe");
 			}
 
 			json j = *empleado;
@@ -32,7 +32,7 @@ void EmpleadoCROW::run() {
 
 		});
 
-	//app.multithreaded().concurrency(thread::ha).port(8000).run();
+	app.multithreaded().concurrency(std::thread::hardware_concurrency()).port(8000).run();
 }
 
 EmpleadoCROW::~EmpleadoCROW()
