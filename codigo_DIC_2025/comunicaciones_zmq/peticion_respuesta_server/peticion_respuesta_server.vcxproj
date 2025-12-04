@@ -18,13 +18,18 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Persona.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="servidor.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{240f2ede-f88c-4ae4-a526-fe7871e84203}</ProjectGuid>
-    <RootNamespace>peticonrespuestaserver</RootNamespace>
+    <ProjectGuid>{203851c2-02aa-473d-af9a-c2939603cfe9}</ProjectGuid>
+    <RootNamespace>peticionrespuestaserver</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>peticion_respuesta_server</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -123,12 +128,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="servidor.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Persona.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

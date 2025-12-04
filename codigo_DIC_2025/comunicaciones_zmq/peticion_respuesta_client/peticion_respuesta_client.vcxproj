@@ -18,11 +18,17 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cliente.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Persona.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{383ed16c-e1f0-4763-affd-06381aad3b1e}</ProjectGuid>
-    <RootNamespace>peticionrespuestacliente</RootNamespace>
+    <ProjectGuid>{1744a91c-ca4e-4208-b61a-24cb261a389e}</ProjectGuid>
+    <RootNamespace>peticionrespuestaclient</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -122,12 +128,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="cliente.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Persona.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
