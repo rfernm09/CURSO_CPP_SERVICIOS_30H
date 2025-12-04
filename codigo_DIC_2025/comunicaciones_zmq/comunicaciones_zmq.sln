@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "push_pull_dispatcher", "pus
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "push_pull_worker", "push_pull_worker\push_pull_worker.vcxproj", "{C8D7FCE2-967C-4B11-8F82-A3BCB31C5923}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "R_D_router", "R_D_router\R_D_router.vcxproj", "{26D7CFA0-525B-4385-9ACB-AA81365E0C8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -71,6 +73,14 @@ Global
 		{C8D7FCE2-967C-4B11-8F82-A3BCB31C5923}.Release|x64.Build.0 = Release|x64
 		{C8D7FCE2-967C-4B11-8F82-A3BCB31C5923}.Release|x86.ActiveCfg = Release|Win32
 		{C8D7FCE2-967C-4B11-8F82-A3BCB31C5923}.Release|x86.Build.0 = Release|Win32
+		{26D7CFA0-525B-4385-9ACB-AA81365E0C8B}.Debug|x64.ActiveCfg = Debug|x64
+		{26D7CFA0-525B-4385-9ACB-AA81365E0C8B}.Debug|x64.Build.0 = Debug|x64
+		{26D7CFA0-525B-4385-9ACB-AA81365E0C8B}.Debug|x86.ActiveCfg = Debug|Win32
+		{26D7CFA0-525B-4385-9ACB-AA81365E0C8B}.Debug|x86.Build.0 = Debug|Win32
+		{26D7CFA0-525B-4385-9ACB-AA81365E0C8B}.Release|x64.ActiveCfg = Release|x64
+		{26D7CFA0-525B-4385-9ACB-AA81365E0C8B}.Release|x64.Build.0 = Release|x64
+		{26D7CFA0-525B-4385-9ACB-AA81365E0C8B}.Release|x86.ActiveCfg = Release|Win32
+		{26D7CFA0-525B-4385-9ACB-AA81365E0C8B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
