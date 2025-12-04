@@ -18,6 +18,7 @@ int main()
     std::cout << "Enviar tareas ...." << std::endl;
 
     for (int i = 0; i < 10; i++) {
+        std::cout << "Enviando Tarea " << std::to_string((i + 1)) << std::endl;
         socket.send(zmq::buffer("Tarea " + std::to_string((i + 1))), zmq::send_flags::none);
     }
 
