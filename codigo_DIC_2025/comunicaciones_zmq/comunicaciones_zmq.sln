@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "R_D_router", "R_D_router\R_
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "R_D_dealer1", "R_D_dealer1\R_D_dealer1.vcxproj", "{7971E982-47C4-4A3B-A0CA-E9B648DA99D9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "R_D_dealer2", "R_D_dealer2\R_D_dealer2.vcxproj", "{B5B2F6DE-44E5-464C-B15C-1DB16029D492}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -91,6 +93,14 @@ Global
 		{7971E982-47C4-4A3B-A0CA-E9B648DA99D9}.Release|x64.Build.0 = Release|x64
 		{7971E982-47C4-4A3B-A0CA-E9B648DA99D9}.Release|x86.ActiveCfg = Release|Win32
 		{7971E982-47C4-4A3B-A0CA-E9B648DA99D9}.Release|x86.Build.0 = Release|Win32
+		{B5B2F6DE-44E5-464C-B15C-1DB16029D492}.Debug|x64.ActiveCfg = Debug|x64
+		{B5B2F6DE-44E5-464C-B15C-1DB16029D492}.Debug|x64.Build.0 = Debug|x64
+		{B5B2F6DE-44E5-464C-B15C-1DB16029D492}.Debug|x86.ActiveCfg = Debug|Win32
+		{B5B2F6DE-44E5-464C-B15C-1DB16029D492}.Debug|x86.Build.0 = Debug|Win32
+		{B5B2F6DE-44E5-464C-B15C-1DB16029D492}.Release|x64.ActiveCfg = Release|x64
+		{B5B2F6DE-44E5-464C-B15C-1DB16029D492}.Release|x64.Build.0 = Release|x64
+		{B5B2F6DE-44E5-464C-B15C-1DB16029D492}.Release|x86.ActiveCfg = Release|Win32
+		{B5B2F6DE-44E5-464C-B15C-1DB16029D492}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

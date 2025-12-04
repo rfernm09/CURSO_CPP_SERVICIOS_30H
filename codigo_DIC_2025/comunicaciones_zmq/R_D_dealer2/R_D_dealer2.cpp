@@ -1,5 +1,6 @@
-// R_D_dealer1.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
+// R_D_dealer2.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
 //
+
 
 #include <iostream>
 #include <zmq.hpp>
@@ -13,13 +14,13 @@ int main()
     zmq::socket_t dealer(contexto, zmq::socket_type::dealer);
 
     // Configurar el socket para asignar el idcliente:
-    dealer.set(zmq::sockopt::routing_id, "cliente_1");
+    dealer.set(zmq::sockopt::routing_id, "cliente_2");
 
     // conectar al puerto:
     dealer.connect("tcp:://localhost:5555");
 
     std::cout << "Conectado al puerto: 5555" << std::endl;
-    std::string mensaje = "soy el cliente 1";
+    std::string mensaje = "soy el cliente 2";
     dealer.send(zmq::message_t(mensaje), zmq::send_flags::none);
     std::cout << "mensaje enviado" << std::endl;
 
