@@ -1,7 +1,6 @@
 // R_D_dealer2.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
 //
 
-
 #include <iostream>
 #include <zmq.hpp>
 #include <string>
@@ -17,7 +16,7 @@ int main()
     dealer.set(zmq::sockopt::routing_id, "cliente_2");
 
     // conectar al puerto:
-    dealer.connect("tcp:://localhost:5559");
+    dealer.connect("tcp://localhost:5559");
 
     std::cout << "Conectado al puerto: 5555" << std::endl;
     std::string mensaje = "soy el cliente 2";
