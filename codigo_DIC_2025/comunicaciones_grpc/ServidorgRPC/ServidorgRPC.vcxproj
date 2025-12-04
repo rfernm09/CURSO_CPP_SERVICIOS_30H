@@ -123,7 +123,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="saludo.grpc.pb.cc" />
+    <ClCompile Include="saludo.pb.cc" />
     <ClCompile Include="ServidorgRPC.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="saludo.grpc.pb.h" />
+    <ClInclude Include="saludo.pb.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
