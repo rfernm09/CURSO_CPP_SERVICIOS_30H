@@ -55,10 +55,10 @@ int main()
         });
 
     // Poner en marcha el servidor por HTTP
-    //app.multithreaded().concurrency(std::thread::hardware_concurrency()).port(8000).run();
+    app.multithreaded().concurrency(std::thread::hardware_concurrency()).port(8000).run();
 
     // Poner en marcha el servidor por HTTPs:
-    app.ssl_file("..\\certificados\\cert.pem", "..\\certificados\\key.pem").port(8443).run();
+    //app.ssl_file("..\\certificados\\cert.pem", "..\\certificados\\key.pem").port(8443).run();
 
     return 0;
 }
