@@ -73,7 +73,7 @@ int main()
 
 		// Lanzar un hilo con boost para atender al cliente conectado:
 		boost::asio::post(pool, [s = std::move(socket)]() mutable {
-			do_session(std::move(s))
+			do_session(std::move(s));
 		});
 	}
    
