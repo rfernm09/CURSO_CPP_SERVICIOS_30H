@@ -11,4 +11,4 @@ public:
 	bool add(int);
 	void imprimir();
 	~Vector();
-}
+};
