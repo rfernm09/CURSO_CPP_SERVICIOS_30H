@@ -28,7 +28,58 @@ class session : public std::enable_shared_from_this<session> {
 
 public:
 	session(tcp::socket socket):socket_(std::move(socket)){}
-	void start() {}
+	void start() { read_request(); }
+
+private:
+	void read_request() {
+		// Obtener un std::shared_ptr que apunta a la clase actual:
+		auto self = shared_from_this();
+
+		// Hacemos una lectura sincrona:
+		http::async_read(socket, buffer, request, [self](beast::error_code ec, std::size_t) {
+			if (!ec) {
+				self->handler_request();
+			}
+		});
+
+	}
+	void handler_request() {
+		// Analizar la peticion, operaciones ...
+		std::string respuesta;
+
+		respuesta = "URL: " + std::string(request.target()) + " Method: " + std::string(request.method_string());
+
+		// Montar la respuesta al cliente: se copia la version del protocolo y el tipo de conexion a la respuesta
+		response.version(request.version());
+		response.keep_alive(request.keep_alive());
+		response.result(http::status::ok);
+
+		// Configurar las cabeceras: http
+		response.set(http::field::server, "Boost.asio");
+		response.set(http::field::content_type, "text/plain");
+
+		// En el body cargamos la respuesta:
+		response.body() = respuesta;
+
+		// Calcular el tamaño de la respuesta:
+		response.prepare_payload();
+
+		// Escribir:
+		this->write_response();
+
+	}
+
+	void write_response() {
+		// Obtener un std::shared_ptr que apunta a la clase actual:
+		auto self = shared_from_this();
+
+		// Hacemos una escritura asincrona:
+		http::async_write(socket_, response, [self](beast::error_code ec, std::size_t) {
+			// Cerrar la conexion:
+			self->socket_.shutdown(tcp::socket::shutdown_send, ec);
+		});
+	}
+
 };
 
 
@@ -43,6 +94,9 @@ void do_accept(tcp::acceptor& acceptor) {
 			// Crear y arrancar la sesion:
 			std::make_shared<session>(std::move(socket))->start();
 		}
+
+		// Llamada recursiva para continuar aceptando clientes:
+		do_accept(acceptor);
 	});
 }
 
