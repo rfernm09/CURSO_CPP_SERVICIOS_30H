@@ -24,7 +24,7 @@ int main()
 		net::io_context ioc;
 
 		// DEfinir el contexto SSL para conexion segura:
-		ssl::context ctx(ssl::context::tlsv12_server);
+		ssl::context ctx(ssl::context::tlsv12_client);
 
 		// En nuestro caso, certificados autofirmados en local:
 		ctx.set_verify_mode(ssl::verify_none);
@@ -39,7 +39,7 @@ int main()
 
 
 		// Localizar el servidor: devuelve un iterator con los endpoint del servidor
-		auto const results = resolver.resolve("localhost", std::to_string(PUERTO);
+		auto const results = resolver.resolve("localhost", std::to_string(PUERTO));
 
 		// Intentar conectar con alguno de los endpoint del servidor:
 		net::connect(ws.next_layer().next_layer(), results.begin(), results.end());
