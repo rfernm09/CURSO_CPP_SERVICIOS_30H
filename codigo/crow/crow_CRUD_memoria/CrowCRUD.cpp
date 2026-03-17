@@ -125,7 +125,7 @@ void CrowCRUD::run()
 	});
 
 	// Configurar el nivel de Log: por defecto es INFO
-	crow::logger::setLogLevel(crow::LogLevel::Debug);
+	crow::logger::setLogLevel(crow::LogLevel::Info);
 
 	// Puesta en marcha del servidor
 	app.port(8080).multithreaded().run();
