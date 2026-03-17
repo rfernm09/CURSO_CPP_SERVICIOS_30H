@@ -13,6 +13,8 @@ void CrowCRUD::run()
 	// Create - POST /usuarios
 	CROW_ROUTE(app, "/usuarios").methods(crow::HTTPMethod::POST)([this](const crow::request& req) {
 
+		CROW_LOG_INFO << "Operación POST en usuarios";
+
 		// Recoger el json que viene de la Request: el tipo es: crow::json::rvalue
 		auto body = crow::json::load(req.body);
 		if (!body) {
@@ -35,6 +37,8 @@ void CrowCRUD::run()
 
 	CROW_ROUTE(app, "/usuarios/<int>").methods(crow::HTTPMethod::GET)([this](int id) {
 
+		CROW_LOG_INFO << "Operación GET /id en usuarios, id = " << id;
+
 		std::lock_guard<std::mutex> lock(this->mtx);
 		if (this->usuarios.count(id) == 0) {
 			return crow::response(404, "Usuario con el id: " + std::to_string(id) + " no existe");
@@ -51,7 +55,7 @@ void CrowCRUD::run()
 
 	// Get - GET /usuarios
 	CROW_ROUTE(app, "/usuarios").methods(crow::HTTPMethod::GET)([this]() {
-
+		
 		std::lock_guard<std::mutex> lock(this->mtx);
 
 		// Definimos una estructura lista que se convierte a un array de json
@@ -72,6 +76,8 @@ void CrowCRUD::run()
 			// Cargar en la lista:
 			lista[i++] = std::move(item);
 		}
+
+		CROW_LOG_INFO << "Operación GET en usuarios (" << usuarios.size() << ")";
 
 		// Definir la respuesta:
 		crow::json::wvalue  resp;
@@ -95,6 +101,8 @@ void CrowCRUD::run()
 			return crow::response(404, "Usuario con el id: " + std::to_string(id) + " no existe");
 		}
 
+		CROW_LOG_INFO << "Operación PUT en el usuario id: " << std::to_string(id);
+
 		// Todo ok, actualizamos el usuario:
 		usuarios[id] = std::move(body);
 		return crow::response(200, "Usuario actualizado");
@@ -108,12 +116,18 @@ void CrowCRUD::run()
 			return crow::response(404, "Usuario con el id: " + std::to_string(id) + " no existe");
 		}
 
+		CROW_LOG_INFO << "Operación DELETE en usuarios: id = " << id;
+
 		// En la respuesta indicamos que va todo bien pero no tenemos contenido: 204
 		crow::response resp;
 		resp.code = 204;
 		return resp;
 	});
 
+	// Configurar el nivel de Log: por defecto es INFO
+	crow::logger::setLogLevel(crow::LogLevel::Debug);
+
+	// Puesta en marcha del servidor
 	app.port(8080).multithreaded().run();
 }
 
