@@ -1,0 +1,50 @@
+// wsservidor.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
+//
+
+#include <iostream>
+#include <boost/beast/core.hpp>
+#include <boost/beast/websocket.hpp>
+#include <boost/asio/ip/tcp.hpp>
+
+#include <iostream>
+#include <string>
+
+namespace beast = boost::beast;
+namespace websocket = beast::websocket;
+namespace asio = boost::asio;
+using tcp = asio::ip::tcp;
+
+void servidorWS() {
+    try {
+        // Definir el contexto de io:
+        asio::io_context ioc;
+
+        // Crear el socket de escucha;
+        tcp::acceptor acceptor(ioc, tcp::endpoint(tcp::v4(), 8080));
+        std::cout << "Servidor WS escuchando en el puerto 8080" << std::endl;
+
+        for (;;) {
+            // Aceptar la conexion, al aceptar la conexion se devuelve otro socket
+            tcp::socket socket(ioc);
+
+            // Acepta la conexion de un cliente:
+            acceptor.accept(socket);
+            std::cout << "Cliente aceptado ..." << std::endl;
+
+
+
+        }
+
+    }
+    catch (const std::exception& ex) {
+
+    }
+}
+
+
+int main()
+{
+    servidorWS();
+    return 0;
+}
+
