@@ -33,10 +33,21 @@ void clienteWS() {
         // Handshake:
         ws.handshake("127.0.0.1", "/");
 
-        std::cout << "Conectado al servidor con WebnSockets " << std::endl;
+        std::cout << "Conectado al servidor con WebSockets " << std::endl;
 
+        // Enviamos un mensaje al servidor:
+        std::string mensaje = "Hola desde el cliente";
+        ws.write(asio::buffer(mensaje));
 
+        // Leer la respuesta: necesitamos un buffer:
+        beast::flat_buffer buffer;
+        ws.read(buffer);
 
+        // Obtener la respuesta del servidor:
+        std::cout << "Respuesta del servidor: " << beast::buffers_to_string(buffer.data()) << std::endl;
+
+        // cerrar la conexion:
+        ws.close(websocket::close_code::normal);
 
     }
     catch (const std::exception& ex) {
