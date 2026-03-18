@@ -31,13 +31,30 @@ void servidorWS() {
             acceptor.accept(socket);
             std::cout << "Cliente aceptado ..." << std::endl;
 
+            // Crear el socket stream;
+            websocket::stream<tcp::socket> ws(std::move(socket));
 
+            // Realizar el handshake:
+            ws.accept();
 
+            // Bucle de comunicacion con ese cliente: Servidor de eco:
+            for (;;) {
+                // Definir un buffer:
+                beast::flat_buffer buffer;
+                ws.read(buffer);
+
+                // Se convierte los datos del buffer a string:
+                std::string msg = beast::buffers_to_string(buffer.data());
+                std::cout << "Mensaje recibido: " << msg << std::endl;
+
+                // Contestar al cliente: hacer eco!
+                ws.write(asio::buffer(msg));
+            }
         }
 
     }
     catch (const std::exception& ex) {
-
+        std::cerr << "ERROR: " << ex.what() << std::endl;
     }
 }
 
