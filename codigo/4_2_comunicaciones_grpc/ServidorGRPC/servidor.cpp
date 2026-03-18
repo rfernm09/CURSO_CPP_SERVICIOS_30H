@@ -17,6 +17,7 @@ class SaludoServiceImpl final : public Saludo::Service {
         std::string nombre = request->nombre();
         reply->set_mensaje("Hola, " + nombre + "!");
         return Status::OK;
+
     }
 };
 
