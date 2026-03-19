@@ -74,6 +74,15 @@ void CategoriaRepositorio::update(const Categoria& cat)
 
 void CategoriaRepositorio::deleteid(int id)
 {
+	std::string query = "DELETE FROM tbcategorias WHERE id = " + std::to_string(id);
+	PGresult* res = PQexec(conn, query.c_str());
+
+	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+		PQclear(res);
+		throw std::runtime_error("Error al eliminar la categoria: "+std::to_string(id));
+	}
+
+	PQclear(res);
 }
 
 std::vector<Categoria> CategoriaRepositorio::selectAll()
