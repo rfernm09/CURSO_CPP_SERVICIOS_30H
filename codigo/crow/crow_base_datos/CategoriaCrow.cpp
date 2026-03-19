@@ -1,6 +1,12 @@
 #include <crow.h>
+#include <nlohmann/json.hpp>
+#include <optional>
+#include <string>
 #include "Categoria.h"
 #include "CategoriaCrow.h"
+
+using json = nlohmann::json;
+
 
 CategoriaCrow::CategoriaCrow(const CategoriaRepositorio& repo):repo(repo)
 {
@@ -11,22 +17,22 @@ void CategoriaCrow::run()
 	crow::SimpleApp app;
 
 	CROW_ROUTE(app, "/categorias/<int>").methods(crow::HTTPMethod::GET)([this](int id) {
-		/*/
-		CROW_LOG_INFO << "Operación GET /id en usuarios, id = " << id;
-
-		std::lock_guard<std::mutex> lock(this->mtx);
-		if (this->usuarios.count(id) == 0) {
-			return crow::response(404, "Usuario con el id: " + std::to_string(id) + " no existe");
+		
+		try {
+			auto cat = this->repo.read(id);
+			if (cat) {
+				json j = cat;
+				return crow::response(200, j);
+			}
+			else {
+				// No existe.
+				return crow::response(404, "Categoria con el id: " + std::to_string(id) + " no existe");
+			}
 		}
-
-		// El usuario existe hay que devolverlo:
-		crow::json::wvalue res;
-		res["id"] = id;
-		res["nombre"] = usuarios[id]["nombre"].s();
-		res["edad"] = usuarios[id]["edad"].i();
-
-		return crow::response(res);*/
-		return crow::response("pendiente");
+		catch (const std::exception& e) {
+			std::string msg = e.what();
+			return crow::response(500, "Error interno en el servidor: " + msg);
+		}
 	});
 
 	CROW_ROUTE(app, "/categorias").methods(crow::HTTPMethod::GET)([this]() {
