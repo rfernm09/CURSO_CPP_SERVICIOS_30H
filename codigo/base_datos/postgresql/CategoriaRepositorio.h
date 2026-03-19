@@ -10,9 +10,9 @@ class CategoriaRepositorio
 public:
 	CategoriaRepositorio(std::string cadconex);
 	std::optional<Categoria> read(int id);
-	void create(const Categoria& categoria);
-	void update(const Categoria& categoria);
-	void deleteid(int id);
+	int create(const Categoria& categoria);
+	int update(const Categoria& categoria);
+	int deleteid(int id);
 	std::vector<Categoria> selectAll();
 	~CategoriaRepositorio();
 

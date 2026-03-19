@@ -50,7 +50,15 @@ void testRepositorio() {
     }
 
     // Delete: 
-    repo.deleteid(9);
+    id = 9;
+    int cont = repo.deleteid(id);
+
+    if (cont) {
+        std::cout << "Se ha eliminado la categoria: " << id << std::endl;
+    }
+    else {
+        std::cout << "No existe la categoria " << id << std::endl;
+    }
 }
 
 int main()

@@ -37,11 +37,12 @@ std::optional<Categoria> CategoriaRepositorio::read(int id)
 	return c;
 }
 
-void CategoriaRepositorio::create(const Categoria& categoria)
+int CategoriaRepositorio::create(const Categoria& categoria)
 {
+	return 0;
 }
 
-void CategoriaRepositorio::update(const Categoria& cat)
+int CategoriaRepositorio::update(const Categoria& cat)
 {
 	const char* query = "UPDATE tbcategorias SET nombre = $1 WHERE id = $2";
 
@@ -68,11 +69,13 @@ void CategoriaRepositorio::update(const Categoria& cat)
 		throw std::runtime_error("Error al actualizar categoria: " + errorMsg);
 	}
 
+	int filas = std::stoi(PQcmdTuples(res));
 	PQclear(res);
 
+	return filas;
 }
 
-void CategoriaRepositorio::deleteid(int id)
+int CategoriaRepositorio::deleteid(int id)
 {
 	std::string query = "DELETE FROM tbcategorias WHERE id = " + std::to_string(id);
 	PGresult* res = PQexec(conn, query.c_str());
@@ -82,7 +85,10 @@ void CategoriaRepositorio::deleteid(int id)
 		throw std::runtime_error("Error al eliminar la categoria: "+std::to_string(id));
 	}
 
+	int filas = std::stoi(PQcmdTuples(res));
 	PQclear(res);
+
+	return filas;
 }
 
 std::vector<Categoria> CategoriaRepositorio::selectAll()
