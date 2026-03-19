@@ -2,9 +2,17 @@
 //
 
 #include <iostream>
+#include <string>
+
+#include "CategoriaCrow.h"
+#include "CategoriaRepositorio.h"
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	const char* conninfo = "host=127.0.0.1 port=5433 dbname=empresa3 user=antonio password=antonio";
+	CategoriaRepositorio repo(conninfo.c_str());
+	CategoriaCrow servicio();
+	servicio.run();
 }
 

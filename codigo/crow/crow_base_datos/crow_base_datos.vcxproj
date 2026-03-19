@@ -124,11 +124,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CategoriaCrow.cpp" />
     <ClCompile Include="CategoriaRepositorio.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Categoria.h" />
+    <ClInclude Include="CategoriaCrow.h" />
     <ClInclude Include="CategoriaRepositorio.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
