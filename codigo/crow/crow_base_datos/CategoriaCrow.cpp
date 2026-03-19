@@ -60,7 +60,21 @@ void CategoriaCrow::run()
 
 	CROW_ROUTE(app, "/categorias/<int>").methods(crow::HTTPMethod::Delete)([this](int id) {
 		
-		return crow::response("pendiente");
+		try {
+			int filas = this->repo.deleteid(id);
+			if (filas == 0) {
+				return crow::response(404, "Categoria con el id: " + std::to_string(id) + " no existe");
+			}
+			else {
+				return crow::response(204);
+			}
+
+		}
+		catch (const std::exception& e) {
+				std::string msg = e.what();
+				return crow::response(500, "Error interno en el servidor: " + msg);
+		}
+		
 	});
 
 	// Puesta en marcha del servidor
