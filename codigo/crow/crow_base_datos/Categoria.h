@@ -11,7 +11,7 @@ struct Categoria {
 };
 
 // Conversion a JSON:
-void to_json(json& j, const Categoria& c) {
+inline void to_json(json& j, const Categoria& c) {
 	j = json{
 		{"id", c.id},
 		{"nombre", c.nombre}
@@ -19,7 +19,7 @@ void to_json(json& j, const Categoria& c) {
 }
 
 // Conversion a Categoria:
-void from_json(const json& j, Categoria& c) {
+inline void from_json(const json& j, Categoria& c) {
 	j.at("id").get_to(c.id);
 	j.at("nombre").get_to(c.nombre);
 }
