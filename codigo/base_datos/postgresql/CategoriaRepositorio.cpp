@@ -15,7 +15,26 @@ CategoriaRepositorio::CategoriaRepositorio(std::string cadconex)
 
 std::optional<Categoria> CategoriaRepositorio::read(int id)
 {
-	return std::optional<Categoria>();
+	std::string query = "SELECT id, nombre FROM tbcategorias WHERE id = " + std::to_string(id);
+	PGresult* res = PQexec(conn, query.c_str());
+
+	if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+		PQclear(res);
+		throw std::runtime_error("Error al recuperar la categoria con id "+std::to_string(id));
+	}
+
+	if (PQntuples(res) == 0) {
+		// No hay resultados:
+		PQclear(res);
+		return std::nullopt;
+	}
+
+	Categoria c;
+	c.id = std::stoi(PQgetvalue(res, 0, 0));
+	c.nombre = PQgetvalue(res, 0, 1);
+
+	PQclear(res);
+	return c;
 }
 
 void CategoriaRepositorio::create(const Categoria& categoria)
