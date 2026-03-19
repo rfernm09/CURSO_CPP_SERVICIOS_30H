@@ -2,8 +2,15 @@
 
 #include "CategoriaRepositorio.h"
 
-CategoriaRepositorio::CategoriaRepositorio(PGconn* conn):conn(conn)
+CategoriaRepositorio::CategoriaRepositorio(std::string cadconex)
 {
+	this->conn = PQconnectdb(cadconex.c_str());
+	if (PQstatus(conn) != CONNECTION_OK) {
+		PQfinish(conn);
+		std::string mensaje = PQerrorMessage(conn);
+
+		throw std::runtime_error("Error en la conexion: " + mensaje);		
+	}
 }
 
 std::optional<Categoria> CategoriaRepositorio::read(int id)
@@ -46,4 +53,5 @@ std::vector<Categoria> CategoriaRepositorio::selectAll()
 
 CategoriaRepositorio::~CategoriaRepositorio()
 {
+	PQfinish(conn);
 }

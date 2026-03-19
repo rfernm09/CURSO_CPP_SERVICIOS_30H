@@ -2,12 +2,13 @@
 #include  <libpq-fe.h>
 #include <optional>
 #include <vector>
+#include <string>
 #include "Categoria.h"
 
 class CategoriaRepositorio
 {
 public:
-	CategoriaRepositorio(PGconn* conn);
+	CategoriaRepositorio(std::string cadconex);
 	std::optional<Categoria> read(int id);
 	void create(const Categoria& categoria);
 	void update(const Categoria& categoria);

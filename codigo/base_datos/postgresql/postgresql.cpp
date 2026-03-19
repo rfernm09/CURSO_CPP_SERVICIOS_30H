@@ -27,21 +27,13 @@ int testConexion() {
 void testRepositorio() {
     const char* conninfo = "host=127.0.0.1 port=5433 dbname=empresa3 user=antonio password=antonio";
 
-    PGconn* conn = PQconnectdb(conninfo);
-    if (PQstatus(conn) != CONNECTION_OK) {
-        std::cerr << "Error de conexión: " << PQerrorMessage(conn) << std::endl;
-        PQfinish(conn);
-        return;
-    }
+    CategoriaRepositorio repo(conninfo);
 
-    std::cout << "Conexion exitosa a PostgreSQL" << std::endl;
-    CategoriaRepositorio repo(conn);
+    // selectAll()
     std::vector<Categoria> categorias = repo.selectAll();
     for (const auto& c : categorias) {
         std::cout << c.id << " " << c.nombre << std::endl;
-    }
-
-    PQfinish(conn);
+    }   
 }
 
 int main()
