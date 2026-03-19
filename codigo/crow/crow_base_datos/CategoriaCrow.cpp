@@ -21,8 +21,11 @@ void CategoriaCrow::run()
 		try {
 			auto cat = this->repo.read(id);
 			if (cat) {
-				json j = cat;
-				return crow::response(200, j);
+				// cat es un ptr a una estructura
+				json j = *cat;
+
+				// Convertir el json a string con dump
+				return crow::response(200, j.dump(4));
 			}
 			else {
 				// No existe.
