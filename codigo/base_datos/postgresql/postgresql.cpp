@@ -38,10 +38,12 @@ void testRepositorio() {
     std::cout << "---------------" << std::endl;
 
     // Read:
-    int id = 4;
+    int id = 7;
     auto cat = repo.read(id);
     if (cat) {
         std::cout << cat->id << " " << cat->nombre << " " << std::endl;
+        cat->nombre = "Solo frutas";
+        repo.update(*cat);
     }
     else {
         std::cout << "No se encuentra la categoria " << id << std::endl;
