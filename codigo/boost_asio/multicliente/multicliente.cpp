@@ -86,7 +86,7 @@ int main() {
         std::cout << "Servidor escuchando en puerto 8080...\n";
 
 
-        /* Elegir u hilo o varios */
+        /* Elegir un hilo o varios */
 
         // Solo lo llama un hilo 
         //ioc.run();
