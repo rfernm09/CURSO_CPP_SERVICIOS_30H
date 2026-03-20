@@ -2,9 +2,16 @@
 //
 
 #include <iostream>
+#include <crow.h>
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    crow::SimpleApp app;
+
+    CROW_ROUTE(app, "/")([]() {
+        return "Hola seguro con HTTPS";
+    });
+
+    app.port(8080).multithreaded().run();
 }
 
