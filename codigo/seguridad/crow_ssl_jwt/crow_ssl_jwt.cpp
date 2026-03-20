@@ -3,9 +3,9 @@
 
 #include <iostream>
 #include <crow.h>
-#include <nlohmann/json.hpp>
 #include <chrono>
 #include <jwt-cpp/jwt.h>
+#include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
 
@@ -44,7 +44,7 @@ int main()
                 return crow::response(respuesta);
             }
             else {
-                crow::response(400, "Credenciales incorrectas")
+                crow::response(400, "Credenciales incorrectas");
             }
         }
         catch (const std::exception& ex) {
